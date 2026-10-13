@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Del aula a la bolsa</title>
+  <meta name="description" content="Simulador de cálculos financieros para empresas que salen a cotizar en bolsa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <main class="escena">
+    <div class="escena__fondo" aria-hidden="true"></div>
+    <div class="escena__velo" aria-hidden="true"></div>
+
+    <header class="barra">
+      <a class="marca" href="index.html">
+        <span class="marca__nombre">Del aula a la bolsa</span>
+      </a>
+      <span class="chip">Datos generales</span>
+    </header>
+
+    <form class="tarjeta" id="form-inicio" novalidate aria-labelledby="titulo-form">
+      <div class="tarjeta__cabecera">
+        <div>
+          <span class="etiqueta">Nueva simulación</span>
+          <h1 class="tarjeta__titulo" id="titulo-form">Datos de la <em>empresa</em></h1>
+        </div>
+      </div>
+
+      <div class="tarjeta__cuerpo">
+        <div class="campo">
+          <label class="campo__label" for="empresa">Nombre de la empresa</label>
+          <input class="control" id="empresa" name="empresa" aria-describedby="empresa-error" type="text" autocomplete="organization" placeholder="Ej. Grupo Ejemplo S.A.B. de C.V." maxlength="120">
+          <span class="campo__error" id="empresa-error" aria-live="polite"></span>
+        </div>
+
+        <div class="campo">
+          <label class="campo__label" for="mercado">Tipo de mercado</label>
+          <select class="control" id="mercado" name="mercado" aria-describedby="mercado-error"></select>
+          <span class="campo__error" id="mercado-error" aria-live="polite"></span>
+        </div>
+
+        <div class="campo">
+          <label class="campo__label" for="carrera">Carrera</label>
+          <select class="control" id="carrera" name="carrera" aria-describedby="carrera-error"></select>
+          <span class="campo__error" id="carrera-error" aria-live="polite"></span>
+        </div>
+
+        <div class="campo">
+          <label class="campo__label" for="tipoEmpresa">Tipo de empresa</label>
+          <select class="control" id="tipoEmpresa" name="tipoEmpresa" aria-describedby="tipoEmpresa-error"></select>
+          <span class="campo__error" id="tipoEmpresa-error" aria-live="polite"></span>
+        </div>
+
+        <fieldset class="campo" id="divisa-campo" aria-describedby="divisa-error">
+          <legend class="campo__label">Divisa</legend>
+          <div class="radios">
+            <label class="radio"><input type="radio" name="divisa" value="MXN"> MXN</label>
+            <label class="radio"><input type="radio" name="divisa" value="USD"> USD</label>
+          </div>
+          <span class="campo__error" id="divisa-error" aria-live="polite"></span>
+        </fieldset>
+      </div>
+
+      <div class="tarjeta__pie">
+        <button class="boton boton--fantasma" type="button" id="btn-limpiar">Limpiar</button>
+        <button class="boton boton--primario" type="submit" id="btn-iniciar">Iniciar <span class="boton__flecha" aria-hidden="true"></span></button>
+      </div>
+    </form>
+
+  </main>
+
+  <script src="js/datos.js"></script>
+  <script src="js/inicio.js"></script>
+</body>
+</html>

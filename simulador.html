@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Del aula a la bolsa</title>
+  <meta name="description" content="Simulador de cálculos financieros para una empresa que sale a cotizar en bolsa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/simulador.css">
+</head>
+<body class="tablero">
+  <a class="saltar" href="#area" id="saltar">Saltar al contenido</a>
+  <!-- 1 y 3: logo y menú de opciones -->
+  <aside class="lateral" id="lateral" aria-label="Menú principal">
+    <div class="lateral__cabeza">
+      <a class="logo" href="index.html" title="Volver al inicio">
+        <!-- Logo personal: reemplaza assets/logo.png (ver README) -->
+        <img class="logo__img" src="assets/logo.png" alt="Logo" id="logo-img">
+        <span class="logo__relleno" id="logo-relleno" hidden>Del aula a la bolsa</span>
+      </a>
+      <button class="lateral__colapsar" type="button" id="btn-colapsar" aria-label="Contraer menú" aria-expanded="true">«</button>
+    </div>
+
+    <nav class="menu" id="menu">
+      <a class="menu__item" href="#valor-emision" data-ruta="valor-emision">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9m5 10V5m5 14v-7m5 7V3"/></svg>
+        <span>Valor de emisión</span>
+      </a>
+      <a class="menu__item" href="#spei" data-ruta="spei">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg>
+        <span>SPEI</span>
+      </a>
+      <a class="menu__item" href="#ruta-operacion" data-ruta="ruta-operacion">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 6h7a3 3 0 0 1 0 6H10a3 3 0 0 0 0 6h7"/></svg>
+        <span>Ruta de una operación</span>
+      </a>
+      <a class="menu__item" href="#rendimiento" data-ruta="rendimiento">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>
+        <span>Rendimiento simple</span>
+      </a>
+      <div class="menu__grupo" id="grupo-estados">
+        <button class="menu__item menu__item--grupo" type="button" id="btn-estados" aria-expanded="false" aria-controls="sub-estados">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h7"/></svg>
+          <span>Estados financieros</span>
+          <svg class="menu__flecha" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="menu__sub" id="sub-estados" hidden>
+          <a class="menu__item menu__item--sub" href="#estado-resultados" data-ruta="estado-resultados"><span>Estado de resultados</span></a>
+          <a class="menu__item menu__item--sub" href="#balance-general" data-ruta="balance-general"><span>Balance general</span></a>
+        </div>
+      </div>
+      <a class="menu__item" href="#credito" data-ruta="credito">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+        <span>Costo de crédito</span>
+      </a>
+      <a class="menu__item" href="#datos-bmv" data-ruta="datos-bmv">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M2 20h20"/><circle cx="19" cy="6" r="2"/></svg>
+        <span>Datos para Simulador BMV</span>
+      </a>
+      <a class="menu__item menu__item--accion" href="#exportar" data-ruta="exportar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
+        <span>Exportar</span>
+      </a>
+    </nav>
+  </aside>
+
+  <div class="principal">
+    <!-- 2: nombre del proyecto -->
+    <header class="superior">
+      <button class="superior__menu" type="button" id="btn-menu-movil" aria-label="Abrir menú" aria-controls="lateral" aria-expanded="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <p class="superior__proyecto">Del aula a la bolsa</p>
+      <a class="chip chip--enlace" href="index.html" id="chip-empresa" title="Editar datos de la empresa">Sin empresa</a>
+    </header>
+
+    <main class="contenido">
+      <!-- 4: opción seleccionada -->
+      <div class="encabezado">
+        <p class="etiqueta" id="encabezado-etiqueta">Simulador</p>
+        <h1 class="encabezado__titulo" id="titulo-opcion">Valor de emisión</h1>
+        <p class="encabezado__sub" id="encabezado-sub"></p>
+      </div>
+
+      <div class="aviso" id="aviso-sin-datos" hidden>
+        No hay datos de la empresa. <a href="index.html">Captúralos en el inicio</a>; mientras tanto se usa MXN como divisa.
+      </div>
+
+      <!-- 5: espacio de trabajo de cada opción -->
+      <section class="area" id="area" aria-live="polite" tabindex="-1"></section>
+    </main>
+  </div>
+  <div class="velo-menu" id="velo-menu" hidden></div>
+
+  <script src="js/vendor/chart.umd.min.js"></script>
+  <script src="js/datos.js"></script>
+  <script src="js/calculos.js"></script>
+  <script src="js/formato.js"></script>
+  <script src="js/graficas.js"></script>
+  <script src="js/esqueleto.js"></script>
+  <script src="js/modulos/valor-emision.js"></script>
+  <script src="js/ruta-vertical.js"></script>
+  <script src="js/modulos/spei.js"></script>
+  <script src="js/modulos/ruta-operacion.js"></script>
+  <script src="js/modulos/rendimiento.js"></script>
+  <script src="js/modulos/credito.js"></script>
+  <script src="js/modulos/estado-resultados.js"></script>
+  <script src="js/modulos/balance-general.js"></script>
+  <script src="js/modulos/datos-bmv.js"></script>
+  <script src="js/modulos/exportar.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
